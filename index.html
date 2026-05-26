@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SKYLINE BOT</title>
+
+<link
+rel="icon"
+type="image/png"
+href="https://i.postimg.cc/0rg0Dt1h/IMG-3813.png"
+/>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+overflow-x:hidden;
+overflow-y:auto;
+min-height:100vh;
+background:
+linear-gradient(
+to bottom,
+#06264d 0%,
+#2c78c7 45%,
+#9be4ff 100%
+);
+position:relative;
+}
+
+/* الخلفية */
+
+.sky{
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+overflow:hidden;
+z-index:1;
+}
+
+/* الشمس */
+
+.sun{
+position:absolute;
+top:80px;
+right:100px;
+width:180px;
+height:180px;
+border-radius:50%;
+background:#fff4a8;
+
+box-shadow:
+0 0 70px #fff4a8,
+0 0 140px #ffe066,
+0 0 220px rgba(255,240,170,.8);
+}
+
+/* النجوم */
+
+.star{
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+border-radius:50%;
+opacity:.4;
+animation:blink 4s infinite;
+}
+
+@keyframes blink{
+0%,100%{
+opacity:.2;
+}
+50%{
+opacity:1;
+}
+}
+
+/* الغيوم */
+
+.cloud{
+position:absolute;
+background:rgba(255,255,255,.93);
+border-radius:100px;
+filter:blur(1px);
+opacity:.9;
+animation:cloudMove linear infinite;
+}
+
+.cloud::before,
+.cloud::after{
+content:'';
+position:absolute;
+background:rgba(255,255,255,.93);
+border-radius:50%;
+}
+
+.cloud1{
+width:300px;
+height:90px;
+top:120px;
+left:-400px;
+animation-duration:60s;
+}
+
+.cloud1::before{
+width:120px;
+height:120px;
+top:-55px;
+left:40px;
+}
+
+.cloud1::after{
+width:150px;
+height:150px;
+top:-70px;
+right:35px;
+}
+
+.cloud2{
+width:240px;
+height:75px;
+top:330px;
+left:-300px;
+animation-duration:80s;
+}
+
+.cloud2::before{
+width:90px;
+height:90px;
+top:-40px;
+left:25px;
+}
+
+.cloud2::after{
+width:120px;
+height:120px;
+top:-55px;
+right:30px;
+}
+
+.cloud3{
+width:350px;
+height:100px;
+bottom:120px;
+left:-450px;
+animation-duration:100s;
+opacity:.8;
+}
+
+.cloud3::before{
+width:140px;
+height:140px;
+top:-65px;
+left:45px;
+}
+
+.cloud3::after{
+width:170px;
+height:170px;
+top:-80px;
+right:45px;
+}
+
+@keyframes cloudMove{
+from{
+transform:translateX(0);
+}
+to{
+transform:translateX(2200px);
+}
+}
+
+/* المحتوى */
+
+.container{
+position:relative;
+z-index:10;
+width:100%;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:60px 20px;
+}
+
+/* الكارد */
+
+.card{
+
+width:950px;
+max-width:95%;
+
+padding:65px;
+
+border-radius:40px;
+
+background:
+rgba(255,255,255,.13);
+
+border:
+1px solid rgba(255,255,255,.22);
+
+backdrop-filter:blur(18px);
+
+box-shadow:
+0 10px 40px rgba(0,0,0,.18),
+0 0 100px rgba(0,170,255,.15);
+
+text-align:center;
+
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+0%,100%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-8px);
+}
+}
+
+/* اللوقو */
+
+.logo{
+width:130px;
+margin-bottom:28px;
+
+filter:
+drop-shadow(0 0 15px rgba(255,255,255,.7))
+drop-shadow(0 0 35px rgba(0,180,255,.45));
+}
+
+/* العنوان */
+
+h1{
+font-size:78px;
+font-weight:800;
+color:white;
+letter-spacing:4px;
+margin-bottom:14px;
+
+text-shadow:
+0 0 10px rgba(255,255,255,.5),
+0 0 35px rgba(0,180,255,.35);
+}
+
+/* الوصف */
+
+.desc{
+font-size:22px;
+color:#e0f2fe;
+margin-bottom:45px;
+line-height:1.8;
+}
+
+/* الأزرار */
+
+.buttons{
+display:flex;
+justify-content:center;
+gap:22px;
+flex-wrap:wrap;
+}
+
+/* الزر */
+
+.btn{
+padding:18px 42px;
+border-radius:18px;
+font-size:18px;
+font-weight:600;
+text-decoration:none;
+transition:.35s;
+}
+
+/* زر الإضافة */
+
+.add{
+background:#38bdf8;
+color:white;
+
+box-shadow:
+0 0 25px rgba(56,189,248,.5);
+}
+
+/* زر الدعم */
+
+.support{
+background:rgba(255,255,255,.15);
+border:1px solid rgba(255,255,255,.2);
+color:white;
+backdrop-filter:blur(10px);
+}
+
+/* الهوفر */
+
+.btn:hover{
+transform:translateY(-6px) scale(1.04);
+
+box-shadow:
+0 0 30px rgba(255,255,255,.25),
+0 0 60px rgba(56,189,248,.45);
+}
+
+/* الفوتر */
+
+.footer{
+position:relative;
+z-index:10;
+text-align:center;
+padding-bottom:25px;
+font-size:15px;
+color:#dbeafe;
+}
+
+/* الجوال */
+
+@media(max-width:768px){
+
+.card{
+padding:40px 22px;
+border-radius:28px;
+}
+
+.logo{
+width:95px;
+}
+
+h1{
+font-size:42px;
+letter-spacing:2px;
+}
+
+.desc{
+font-size:16px;
+margin-bottom:35px;
+}
+
+.btn{
+width:100%;
+padding:16px;
+font-size:16px;
+}
+
+.sun{
+width:120px;
+height:120px;
+top:40px;
+right:25px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sky">
+
+<div class="sun"></div>
+
+<div class="star" style="top:12%;left:20%;"></div>
+<div class="star" style="top:18%;left:72%;"></div>
+<div class="star" style="top:30%;left:40%;"></div>
+<div class="star" style="top:55%;left:15%;"></div>
+<div class="star" style="top:75%;left:80%;"></div>
+
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+<div class="cloud cloud3"></div>
+
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<img
+class="logo"
+src="https://i.postimg.cc/0rg0Dt1h/IMG-3813.png"
+>
+
+<h1>SKYLINE BOT</h1>
+
+<p class="desc">
+Advanced Discord System With Modern Sky Technology
+</p>
+
+<div class="buttons">
+
+<a
+class="btn add"
+href="https://discord.com/oauth2/authorize?client_id=1508203632791916724&permissions=8&scope=bot+applications.commands"
+target="_blank"
+>
+Add Bot
+</a>
+
+<a
+class="btn support"
+href="https://discord.gg/WVaXyUSsQq"
+target="_blank"
+>
+Support Server
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+Powered By Skyline
+</div>
+
+</body>
+</html>
